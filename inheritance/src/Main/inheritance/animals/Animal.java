@@ -1,6 +1,6 @@
 package inheritance.animals;
 
-public class Animal {
+abstract public class Animal {
     private int legs;
     private String sound;
     private String species;
@@ -12,6 +12,8 @@ public class Animal {
     public String makeSound() {
         return "The " + getSpecies() + " goes " + getSound();
     }
+
+    abstract public boolean hasLegs();
 
     public int getLegs() {
         return legs;

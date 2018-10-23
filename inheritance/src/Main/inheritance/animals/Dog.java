@@ -14,6 +14,10 @@ public class Dog extends Animal {
         this.breed = breed;
     }
 
+    public boolean hasLegs() {
+        return getLegs() > 0;
+    }
+
     public String getBreed() {
         return breed;
     }
