@@ -3,34 +3,43 @@ import org.junit.Test;
 
 public class CafeTest {
 
+    public static final CoffeeType ESPRESSO = CoffeeType.Espresso;
+    public static final int ESPRESSO_BEANS = ESPRESSO.getRequiredBeans();
+    public static final int NO_MILK = 0;
+    public static final int NO_BEANS = 0;
+    public static final CoffeeType LATTE = CoffeeType.Latte;
+
     @Test
     public void canBrewEspressoTest() {
-        Cafe cafe = new Cafe();
-        cafe.restockBeans(7);
+        Cafe cafe = cafeWithBeans();
 
-        Coffee coffee = cafe.brew(CoffeeType.Espresso);
+        Coffee coffee = cafe.brew(ESPRESSO);
 
-        Assert.assertEquals(CoffeeType.Espresso, coffee.getType());
-        Assert.assertEquals(0, coffee.getMilk());
-        Assert.assertEquals(7, coffee.getBeans());
+        Assert.assertEquals(ESPRESSO, coffee.getType());
+        Assert.assertEquals(NO_MILK, coffee.getMilk());
+        Assert.assertEquals(ESPRESSO_BEANS, coffee.getBeans());
     }
 
     @Test
     public void brewingEspressoConsumesBeansTest() {
-        Cafe cafe = new Cafe();
-        cafe.restockBeans(7);
+        Cafe cafe = cafeWithBeans();
 
-        Coffee coffee = cafe.brew(CoffeeType.Espresso);
+        Coffee coffee = cafe.brew(ESPRESSO);
 
-        Assert.assertEquals(0, cafe.getBeansInStock());
+        Assert.assertEquals(NO_BEANS, cafe.getBeansInStock());
     }
 
     @Test(expected = IllegalStateException.class)
     public void lattesRequireMilkTest() {
+        Cafe cafe = cafeWithBeans();
+
+        Coffee coffee = cafe.brew(LATTE);
+
+    }
+
+    private Cafe cafeWithBeans() {
         Cafe cafe = new Cafe();
-        cafe.restockBeans(7);
-
-        Coffee coffee = cafe.brew(CoffeeType.Latte);
-
+        cafe.restockBeans(ESPRESSO_BEANS);
+        return cafe;
     }
 }
