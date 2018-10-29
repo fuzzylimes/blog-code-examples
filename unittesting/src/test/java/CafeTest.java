@@ -1,6 +1,8 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.hamcrest.Matchers.*;
+
 public class CafeTest {
 
     public static final CoffeeType ESPRESSO = CoffeeType.Espresso;
@@ -15,6 +17,7 @@ public class CafeTest {
 
         Coffee coffee = cafe.brew(ESPRESSO);
 
+        Assert.assertThat(coffee, hasProperty("beans", equalTo(ESPRESSO_BEANS)));
         Assert.assertEquals(ESPRESSO, coffee.getType());
         Assert.assertEquals(NO_MILK, coffee.getMilk());
         Assert.assertEquals(ESPRESSO_BEANS, coffee.getBeans());
